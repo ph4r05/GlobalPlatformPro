@@ -440,11 +440,23 @@ public final class GPData {
         }
 
         public String toString() {
-            return Arrays.asList(Field.values()).stream().map(i -> i.toString() + "=" + HexUtils.bin2hex(values.get(i))).collect(Collectors.joining(", ", "[CPLC: ", "]"));
+            List<Field> lst = Arrays.asList(Field.values());
+            List<String> sub = new ArrayList<>();
+            for(Field fld : lst){
+                sub.add(fld.toString() + "=" + HexUtils.bin2hex(values.get(fld)));
+            }
+
+            return GPUtils.join(sub, ", ", "[CPLC: ", "]");
         }
 
         public String toPrettyString() {
-            return Arrays.asList(Field.values()).stream().map(i -> i.toString() + "=" + HexUtils.bin2hex(values.get(i)) + (i.toString().endsWith("Date") ?  " (" + toDateFailsafe(values.get(i)) + ")": "")).collect(Collectors.joining("\n      ", "CPLC: ", "\n"));
+            List<Field> lst = Arrays.asList(Field.values());
+            List<String> sub = new ArrayList<>();
+            for(Field fld : lst){
+                sub.add(fld.toString() + "=" + HexUtils.bin2hex(values.get(fld)) + (fld.toString().endsWith("Date") ?  " (" + toDateFailsafe(values.get(fld)) + ")": ""));
+            }
+
+            return GPUtils.join(sub, "\n      ", "CPLC: ", "\n");
         }
 
         public enum Field {

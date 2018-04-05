@@ -23,6 +23,7 @@
 package pro.javacard.gp;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class GPUtils {
@@ -79,6 +80,33 @@ public class GPUtils {
 			offset += currentLen;
 		}
 		return result;
+	}
+
+	public static String join(Collection col, String glue){
+		return join(col, glue, null, null);
+	}
+
+	public static String join(Collection col, String glue, String prefix, String suffix){
+		final int size = col.size();
+		final StringBuilder bld = new StringBuilder();
+		if (prefix != null){
+			bld.append(prefix);
+		}
+
+		int ctr = -1;
+		for(Object obj : col){
+			ctr += 1;
+			bld.append(obj.toString());
+			if (ctr - 1 < size){
+				bld.append(glue);
+			}
+		}
+
+		if (suffix != null){
+			bld.append(suffix);
+		}
+
+		return bld.toString();
 	}
 
 }

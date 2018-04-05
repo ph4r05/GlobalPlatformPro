@@ -275,7 +275,7 @@ public final class GPTool {
 
         if (args.has(OPT_LIST_PRIVS)) {
             System.out.println("# Known privileges:");
-            System.out.println(Arrays.asList(Privilege.values()).stream().map(i -> i.toString()).collect(Collectors.joining("\n")));
+            System.out.println(GPUtils.join(Arrays.asList(Privilege.values()), "\n"));
         }
 
         // Now actually talk to possible terminals

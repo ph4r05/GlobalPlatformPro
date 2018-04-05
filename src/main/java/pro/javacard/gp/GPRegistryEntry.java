@@ -378,7 +378,7 @@ public class GPRegistryEntry {
         }
 
         public String toString() {
-            return privs.stream().map(i -> i.toString()).collect(Collectors.joining(", "));
+            return GPUtils.join(privs, ", ");
         }
 
         public boolean has(Privilege p) {
